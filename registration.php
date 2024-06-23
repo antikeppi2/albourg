@@ -1,8 +1,24 @@
 <?php
+require 'config.php';
 if(isset($_POST['submit'])){
-  echo "Username - ".$username"
-  echo "Passoword - ".$password"
-  echo "Repassword - ".$repassword"
+  $username = @$_POST['username'];
+  $username = @$_POST['password'];
+  $username = @$_POST['repassword'];
+  $duplicate = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username'");
+  if(mysqli_num_rows($duplicate) > 0){
+    echo
+    "<script> alert('Username Has Already Been Used')</script>";
+  } else {
+    if($password == $confirmpassword) {
+      $query = "INSERT INTO tb_user VALUES('','$username','$password')";
+      mysqli_query($conn,$query);
+      echo
+      "<script> alert('Registration Successful')</script>";
+    } else {
+      echo
+      "<script> alert('Password Does Not Match')</script>";
+    }
+  }
 }
 ?>
 
