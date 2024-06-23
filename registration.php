@@ -1,9 +1,9 @@
 <?php
 require 'config.php';
-if(isset($_POST['submit'])){
-  $username = @$_POST['username'];
-  $password = @$_POST['password'];
-  $confirmpassword = @$_POST['confirmpassword'];
+if(isset($_POST["submit"])){
+  $username = @$_POST["username"];
+  $password = @$_POST["password"];
+  $confirmpassword = @$_POST["confirmpassword"];
   $duplicate = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username'");
   if(mysqli_num_rows($duplicate) > 0){
     echo
