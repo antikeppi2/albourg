@@ -1,6 +1,9 @@
 <?php
-
-
+if(isset($_POST['submit'])){
+  echo "Username - ".$username"
+  echo "Passoword - ".$password"
+  echo "Repassword - ".$repassword"
+}
 ?>
 
 <!DOCTYPE html>
