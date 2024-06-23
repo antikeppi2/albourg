@@ -12,11 +12,11 @@ if(isset($_POST["submit"])){
       header("Location: index.html");
     } else {
       echo
-      "<script> alert('Wrong Password'); </script>;
+      "<script> alert('Wrong Password'); </script>";
     }
   } else {
     echo
-    "<script> alert('User Is Not Registered'); </script>;
+    "<script> alert('User Is Not Registered'); </script>";
   }
 }
 
