@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ALBOURG (ALBG)</title>
+        <hr>
+    </head>
+
+
+        <body>
+            <header>
+                <b><h1 style="text-align:center">ALBOURG</h1></b>
+        <div style="text-align:center">            
+            <a href="index.html">Home</a>
+            <a href="userregister.html">User Register</a>
+            <a href="contact.html">Contact</a>
+        </div>
+            </header>
+   <main>
+     <form id="form">
+       <input type="search" id="query" name="q" placeholder="Search User...">
+       <button>Search</button>
+       <py-script>
+          import datetime
+import requests
+
+
+base_url = "https://minecraftonline.com/cgi-bin/"
+
+def get_user_info(user):
+    firstseen = f"{base_url}/getfirstseen?{user}"
+    lastseen = f"{base_url}/getlastseen?{user}"
+    timeonline = f"{base_url}/gettimeonline?{user}"
+    isplayerbanned = f"{base_url}/getbanwhy.sh?{user}"
+    username = f"{base_url}/getcorrectname?{user}"
+    response = requests.get(username)
+
+    if response.status_code == 200:
+        print(f"Username;\n{response.text}")
+    else:
+        print(f"Failed To Retrieve Data {response.status_code}")
+
+
+    response = requests.get(firstseen)
+
+    if response.status_code == 200:
+        print(f"First Seen;\n{response.text}")
+    else:
+        print(f"Failed To Retrieve Data {response.status_code}")
+
+    response = requests.get(lastseen)
+
+    if response.status_code == 200:
+        print(f"Last Seen;\n{response.text}")
+    else:
+        print(f"Failed To Retrieve Data {response.status_code}")
+
+    response = requests.get(timeonline)
+    seconds = response.text
+    clean_seconds = seconds.strip()
+    time = str(datetime.timedelta(seconds=int(clean_seconds)))
+
+    if response.status_code == 200:
+        print(f"Time Played;\n{(time)}")
+    else:
+        print(f"Failed To Retrieve Data {response.status_code}")
+
+    response = requests.get(isplayerbanned)
+
+    if response.status_code == 200:
+        print(f"Is Player Banned?\n{response.text}")
+    else:
+        print(f"Failed To Retrieve Data {response.status_code}")
+
+
+user_name = ("Legnano")
+user_info = get_user_info(user_name)
+         
+       </py-script>
+   </main>
+
+<footer>
+    <hr>
+    author: Adam E.<br>
+    &copy; 2025 copyright reserved<br>
+    <a href="mailto:mail@albourg.eu">mail@albourg.eu</a>
+    
+        
+</footer>
+            
+        </body>
+    
+</html>
