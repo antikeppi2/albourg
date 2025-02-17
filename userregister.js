@@ -7,29 +7,33 @@ async function getUserInfo(user) {
   const isPlayerBannedUrl = `${baseUrl}/getbanwhy.sh?${user}`;
   const usernameUrl = `${baseUrl}/getcorrectname?${user}`;
 
+  // Clear previous results
+  const resultsDiv = document.getElementById('results');
+  resultsDiv.innerHTML = '';
+
   try {
     const usernameResponse = await fetch(usernameUrl);
     if (usernameResponse.ok) {
       const username = await usernameResponse.text();
-      console.log(`Username:\n${username}`);
+      resultsDiv.innerHTML += `<div class="result-item"><strong>Username:</strong><br>${username}</div>`;
     } else {
-      console.log(`Failed To Retrieve Data ${usernameResponse.status}`);
+      resultsDiv.innerHTML += `<div class="result-item error">Failed to retrieve Username</div>`;
     }
 
     const firstSeenResponse = await fetch(firstSeenUrl);
     if (firstSeenResponse.ok) {
       const firstSeen = await firstSeenResponse.text();
-      console.log(`First Seen:\n${firstSeen}`);
+      resultsDiv.innerHTML += `<div class="result-item"><strong>First Seen:</strong><br>${firstSeen}</div>`;
     } else {
-      console.log(`Failed To Retrieve Data ${firstSeenResponse.status}`);
+      resultsDiv.innerHTML += `<div class="result-item error">Failed to retrieve First Seen</div>`;
     }
 
     const lastSeenResponse = await fetch(lastSeenUrl);
     if (lastSeenResponse.ok) {
       const lastSeen = await lastSeenResponse.text();
-      console.log(`Last Seen:\n${lastSeen}`);
+      resultsDiv.innerHTML += `<div class="result-item"><strong>Last Seen:</strong><br>${lastSeen}</div>`;
     } else {
-      console.log(`Failed To Retrieve Data ${lastSeenResponse.status}`);
+      resultsDiv.innerHTML += `<div class="result-item error">Failed to retrieve Last Seen</div>`;
     }
 
     const timeOnlineResponse = await fetch(timeOnlineUrl);
@@ -38,22 +42,31 @@ async function getUserInfo(user) {
       const cleanSeconds = seconds.trim();
       const time = new Date(0);
       time.setSeconds(parseInt(cleanSeconds));
-      console.log(`Time Played:\n${new Date(time).toISOString().substr(11, 8)}`);
+      resultsDiv.innerHTML += `<div class="result-item"><strong>Time Played:</strong><br>${new Date(time).toISOString().substr(11, 8)}</div>`;
     } else {
-      console.log(`Failed To Retrieve Data ${timeOnlineResponse.status}`);
+      resultsDiv.innerHTML += `<div class="result-item error">Failed to retrieve Time Played</div>`;
     }
 
     const isPlayerBannedResponse = await fetch(isPlayerBannedUrl);
     if (isPlayerBannedResponse.ok) {
       const isBanned = await isPlayerBannedResponse.text();
-      console.log(`Is Player Banned?\n${isBanned}`);
+      resultsDiv.innerHTML += `<div class="result-item"><strong>Is Player Banned?</strong><br>${isBanned}</div>`;
     } else {
-      console.log(`Failed To Retrieve Data ${isPlayerBannedResponse.status}`);
+      resultsDiv.innerHTML += `<div class="result-item error">Failed to retrieve Ban Info</div>`;
     }
   } catch (error) {
     console.error("Error occurred:", error);
+    resultsDiv.innerHTML += `<div class="result-item error">An error occurred while fetching data.</div>`;
   }
 }
 
-const userName = "Legnano";
-getUserInfo(userName);
+// Handle form submission
+document.getElementById('user-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const username = document.getElementById('username').value.trim();
+  if (username) {
+    getUserInfo(username);
+  } else {
+    alert("Please enter a valid Minecraft username.");
+  }
+});
