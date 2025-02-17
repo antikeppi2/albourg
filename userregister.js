@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {  
   const baseUrl = "https://minecraftonline.com/cgi-bin/";
-  const cors = await import('cors');
- 
 
   app.use(cors({
     origin: "*",
