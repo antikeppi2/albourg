@@ -1,16 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const corsProxy = 'https://cors-anywhere.herokuapp.com/';  // CORS proxy URL
   const baseUrl = "https://minecraftonline.com/cgi-bin/";
-  const corsProxy = 'https://cors-anywhere.herokuapp.com/';
 
   async function getUserInfo(user) {
-    const firstSeenUrl = `${baseUrl}/getfirstseen?${user}`;
-    const lastSeenUrl = `${baseUrl}/getlastseen?${user}`;
-    const timeOnlineUrl = `${baseUrl}/gettimeonline?${user}`;
-    const isPlayerBannedUrl = `${baseUrl}/getbanwhy.sh?${user}`;
-    const usernameUrl = `${baseUrl}/getcorrectname?${user}`;
+    const firstSeenUrl = `${corsProxy}${baseUrl}/getfirstseen?${user}`;
+    const lastSeenUrl = `${corsProxy}${baseUrl}/getlastseen?${user}`;
+    const timeOnlineUrl = `${corsProxy}${baseUrl}/gettimeonline?${user}`;
+    const isPlayerBannedUrl = `${corsProxy}${baseUrl}/getbanwhy.sh?${user}`;
+    const usernameUrl = `${corsProxy}${baseUrl}/getcorrectname?${user}`;
+
+    // Get the results div
+    const resultsDiv = document.getElementById('results');
+
+    // Check if resultsDiv exists
+    if (!resultsDiv) {
+      console.error("Error: #results div not found in the DOM.");
+      return;  // Stop further execution if results div doesn't exist
+    }
 
     // Clear previous results
-    const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = '';
 
     try {
