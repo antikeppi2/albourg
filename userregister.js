@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const baseUrl = "https://minecraftonline.com/cgi-bin/";
+  const corsProxy = 'https://cors-anywhere.herokuapp.com/';
 
   async function getUserInfo(user) {
     const firstSeenUrl = `${baseUrl}/getfirstseen?${user}`;
