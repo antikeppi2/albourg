@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {  
   const baseUrl = "https://minecraftonline.com/cgi-bin/";
+  const cors = require("cors")
+
+  app.use(cors({
+    origin: "*",
+  }))
 
   async function getUserInfo(user) {
     const firstSeenUrl = `${baseUrl}/getfirstseen?${user}`;
