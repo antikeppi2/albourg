@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const corsProxy = 'https://api.allorigins.win/get?url=';  // CORS proxy URL
+  const corsProxy = 'https://cors-proxy.htmldriven.com/?url=';  // CORS proxy URL
   const baseUrl = "https://minecraftonline.com/cgi-bin/";
 
   async function getUserInfo(user) {
